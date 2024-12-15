@@ -1,0 +1,6 @@
+@StructureWebAPI_HostAddress = http://localhost:5289
+
+GET {{StructureWebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
