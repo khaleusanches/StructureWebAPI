@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using StructureWebAPI.Data;
+using StructureWebAPI.Middleware;
 using StructureWebAPI.Services.Autor;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<TimingMiddleware>();
 
 builder.Services.AddScoped<IAutorInterface, AutorService>();
 
@@ -30,6 +32,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<TimingMiddleware>();
 
 app.MapControllers();
 
